@@ -1,11 +1,16 @@
 <?php 
   $mainMenu = [
-    ["page" => "apropos.php", "title" => "A propos", "meta_description" => "L'histoire"],
-    ["page" => "index.php", "title" => "Accueil", "meta_description" => "TechTrendz !"],
-    ["page" => "actualites.php", "title" => "Actualités", "meta_description" => "L'actualité tech"],
+      "index.php" => ["menuTitle" => "Accueil", "head_title" => "Accueil TeckTrendz", "meta_description" => "TechTrendz !"],
+      "actualites.php" => ["menuTitle" => "Actualités", "head_title" => "Actualités TeckTrendz", "meta_description" => "L'actualité tech"],
+      "a_propos.php" => ["menuTitle" => "A propos", "head_title" => "Apropos TeckTrendz", "meta_description" => "L'histoire"],
   ];
 
+  $currentPage = basename($_SERVER["SCRIPT_NAME"]);
+
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,8 +21,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <meta name="description" content="<?=$mainMenu[$currentPage]["meta_description"]?>">
     <link rel="stylesheet" href="assets/css/override-bootstrap.css">
-    <title>TechTrendz</title>
+    <title><?=$mainMenu[$currentPage]["head_title"]?></title>
 </head>
 
 <body>
@@ -29,9 +35,16 @@
                 </a>
             </div>
 
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <ul class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <?php foreach ($mainMenu as $key => $menuItem) { ?>
-                    <li><a href="<?=$menuItem["page"];?>" class="nav-link px-2"><?php echo $menuItem["title"];?></a></li>
+                    <li class="nav-item"><a href="<?=$key;?>" class="nav-link px-2 <?php 
+                        
+                        // if($key === $currentPage){echo "active";}
+                        echo ($key === $currentPage)? "active": "";
+                        
+                        ?>
+                        
+                        "><?php echo $menuItem["menuTitle"];?></a></li>
                     <?php }?>
             </ul>
 
