@@ -1,13 +1,6 @@
-<?php 
-  $mainMenu = [
-      "index.php" => ["menuTitle" => "Accueil", "head_title" => "Accueil TeckTrendz", "meta_description" => "TechTrendz !"],
-      "actualites.php" => ["menuTitle" => "Actualités", "head_title" => "Actualités TeckTrendz", "meta_description" => "L'actualité tech"],
-      "a_propos.php" => ["menuTitle" => "A propos", "head_title" => "Apropos TeckTrendz", "meta_description" => "L'histoire"],
-  ];
+<?php
 
   $currentPage = basename($_SERVER["SCRIPT_NAME"]);
-
-
 
 ?>
 
@@ -36,7 +29,10 @@
             </div>
 
             <ul class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <?php foreach ($mainMenu as $key => $menuItem) { ?>
+                <?php foreach ($mainMenu as $key => $menuItem) { 
+                    if(!$menuItem["exclude"])
+                    {
+                    ?>
                     <li class="nav-item"><a href="<?=$key;?>" class="nav-link px-2 <?php 
                         
                         // if($key === $currentPage){echo "active";}
@@ -45,7 +41,8 @@
                         ?>
                         
                         "><?php echo $menuItem["menuTitle"];?></a></li>
-                    <?php }?>
+                    <?php };
+                        };?>
             </ul>
 
             <div class="col-md-3 text-end">
